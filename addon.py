@@ -23,9 +23,7 @@ def log(
 def get_favourites() -> list[tuple[str, str]]:
     """Return all favourites."""
 
-    favourites = xbmcvfs.translatePath(
-        "special://profile/favourites.xml"
-    )
+    favourites = xbmcvfs.translatePath("special://profile/favourites.xml")
 
     if not xbmcvfs.exists(favourites):
         log("favourites.xml not found.", xbmc.LOGWARNING)
@@ -109,9 +107,7 @@ def select_favourite() -> None:
         name,
     )
 
-    log(
-        f"Saved: '{ADDON.getSetting('favorite_name')}'"
-    )
+    log(f"Saved: '{ADDON.getSetting('favorite_name')}'")
 
 
 def main() -> None:
