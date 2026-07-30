@@ -1,0 +1,87 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Ruff
+        run: pip install ruff
+
+      - name: Run Ruff
+        run: |
+          python -m ruff check .
+          python -m ruff format --check .
+
+      - name: Read addon version
+        id: version
+        run: |
+          python << 'EOF'
+          import xml.etree.ElementTree as ET
+
+          root = ET.parse("addon.xml").getroot()
+          print(f"VERSION={root.attrib['version']}")
+
+          with open("$GITHUB_OUTPUT", "a") as f:
+              f.write(f"version={root.attrib['version']}\n")
+          EOF
+
+      - name: Create ZIP
+        run: |
+          python << 'EOF'
+          from pathlib import Path
+          import zipfile
+          import xml.etree.ElementTree as ET
+
+          root = ET.parse("addon.xml").getroot()
+
+          addon_id = root.attrib["id"]
+          version = root.attrib["version"]
+
+          zip_name = f"{addon_id}-{version}.zip"
+
+          with zipfile.ZipFile(zip_name, "w", zipfile.ZIP_DEFLATED) as zf:
+              for path in Path(".").rglob("*"):
+                  if path.is_dir():
+                      continue
+
+                  if ".git" in path.parts or ".github" in path.parts:
+                      continue
+
+                  if "__pycache__" in path.parts:
+                      continue
+
+                  if ".ruff_cache" in path.parts:
+                      continue
+
+                  if path.name in {
+                      ".gitignore",
+                      ".gitattributes",
+                  }:
+                      continue
+
+                  zf.write(path, Path(addon_id) / path)
+
+          print(zip_name)
+          EOF
+
+      - name: Publish Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "*.zip"

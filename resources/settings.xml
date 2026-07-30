@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings version="1">
+    <section id="script.startupfolder">
+        <category id="general" label="General">
+            <group id="1">
+
+                <setting
+                    id="favorite_name"
+                    type="string"
+                    label="Favourite name"
+                    help="">
+
+                    <level>0</level>
+
+                    <default/>
+
+                    <constraints>
+                        <allowempty>true</allowempty>
+                    </constraints>
+
+                    <control
+                        type="edit"
+                        format="string">
+                        <heading>Favourite name</heading>
+                    </control>
+
+                </setting>
+
+            </group>
+        </category>
+    </section>
+</settings>

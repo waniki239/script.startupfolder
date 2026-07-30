@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon
+    id="script.startupfolder"
+    name="Startup Folder"
+    version="0.1.0"
+    provider-name="waniki239">
+
+    <requires>
+        <import addon="xbmc.python" version="3.0.1"/>
+    </requires>
+
+    <extension
+        point="xbmc.service"
+        library="addon.py"
+        start="startup" />
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Opens a Kodi favourite when Kodi starts.</summary>
+
+        <description lang="en_GB">Executes the configured Kodi favourite automatically after startup.</description>
+
+        <platform>all</platform>
+        <license>MIT</license>
+
+        <source>
+            https://github.com/waniki239/script.startupfolder
+        </source>
+    </extension>
+
+</addon>
