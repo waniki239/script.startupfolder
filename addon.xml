@@ -14,6 +14,10 @@
         library="addon.py"
         start="startup" />
 
+    <extension
+        point="xbmc.python.script"
+        library="addon.py"/>
+
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Opens a Kodi favourite when Kodi starts.</summary>
 

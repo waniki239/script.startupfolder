@@ -1,0 +1,15 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: script.startupfolder\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "#32000"
+msgid "General"
+msgstr ""
+
+msgctxt "#32001"
+msgid "Startup Favourite"
+msgstr ""

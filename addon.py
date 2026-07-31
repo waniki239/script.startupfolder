@@ -6,6 +6,7 @@ import xbmc
 import xbmcaddon
 import xbmcgui
 import xbmcvfs
+import sys
 
 ADDON = xbmcaddon.Addon()
 
@@ -111,7 +112,11 @@ def select_favourite() -> None:
 
 
 def main() -> None:
-    """Run the startup action."""
+    """Entry point."""
+
+    if len(sys.argv) > 1 and sys.argv[1] == "select":
+        select_favourite()
+        return
 
     log("Service started.")
 
