@@ -1,12 +1,12 @@
 from __future__ import annotations
 
+import sys
 import xml.etree.ElementTree as ET
 
 import xbmc
 import xbmcaddon
 import xbmcgui
 import xbmcvfs
-import sys
 
 ADDON = xbmcaddon.Addon()
 
